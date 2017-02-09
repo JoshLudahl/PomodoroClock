@@ -1,0 +1,89 @@
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+body {
+    background-color: #81c784;
+    color:#FFFFFF;
+}
+header {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3em;
+    line-height: 2em;
+}
+
+.clock {
+    text-align: center;
+    font-size: 3rem;
+}
+
+.stacked {
+    color: #81c784;
+}
+#pomodoro {
+    color: #000;
+    font-size: .5em;
+}
+
+.controls {
+    text-align: center;
+}
+
+button {
+    background-color: #eceff1;
+    cursor: pointer;
+    border: none;
+    padding: .75rem;
+    margin: 1em;
+    border-radius: 12px;
+}
+button:hover {
+    background: rgba(236,239,241, .7);
+}
+
+.left {
+    text-align: right;
+}
+.left > span, .right > span {
+    font-size: 1.5em;
+}
+
+
+@media only screen and (max-width: 35em), only screen and (max-device-width: 35em) {
+    .hide {
+        visibility: hidden;
+    }
+    .left, .right {
+        text-align: center;
+    }
+
+}
+
+/* roughly large phones, phablets, and small tablet screens */
+@media (min-width: 35em) and (max-width: 50em) {
+ .hide {
+     visibility: hidden;
+ }
+    .left, .right {
+        text-align: center;
+    }
+}
+
+.mode {
+    font-family: 'Expletus Sans';
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 60px;
+    margin-bottom: 48px;
+    letter-spacing: -1px;
+    text-transform: none;
+}

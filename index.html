@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pomodoro Clock</title>
+
+    <script src="https://use.fontawesome.com/888f010f52.js"></script>
+    <link rel="stylesheet" href="grid.css" type="text/css"/>
+    <link rel="stylesheet" href="main.css" type="text/css"/>
+
+    <link href='https://fonts.googleapis.com/css?family=Expletus+Sans:400' rel='stylesheet' type='text/css'>
+
+
+</head>
+<body>
+
+
+<div class="grid">
+    <div class="col-1">
+        <header class="mode">Pomodoro Clock</header>
+    </div>
+
+    <div class="col-3 left">
+        Rest Time <br/>
+        <a href="javascript:tickDecrement('rest')">
+            <i class="fa fa-minus" aria-hidden="true"></i>
+        </a>
+        <span class="fa-stack fa-3x">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <strong class="fa-stack-1x calendar-text">
+
+                 <span id="rest" class="stacked">5</span>
+
+            </strong>
+        </span>
+
+        <a href="javascript:tickIncrement('rest')">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+        </a>
+
+    </div>
+    <div class="col-3 hide"></div>
+
+    <div class="col-3 right">
+
+
+        Productive Time <br/>
+        <a href="javascript:tickDecrement('workTime')">
+            <i class="fa fa-minus" aria-hidden="true"></i>
+        </a>
+        <span class="fa-stack fa-3x">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <strong class="fa-stack-1x calendar-text">
+
+                 <span id="workTime" class="stacked">25</span>
+
+            </strong>
+        </span>
+
+        <a href="javascript:tickIncrement('workTime')">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+        </a>
+
+    </div>
+    <div class="col-1 controls">
+        <button onclick="startTimer()">Start</button>
+        <button onclick="stopTimer()">Stop</button>
+        <button onclick="resetTimer()">Reset</button>
+    </div>
+
+
+    <div class="col-1 clock">
+        <span class="fa-stack fa-3x">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <strong class="fa-stack-1x calendar-text"><div id="pomodoro"></div></strong>
+        </span>
+
+    </div>
+
+
+    <div class="col-1 clock mode" id="currentMode"></div>
+
+
+
+</div>
+
+
+
+
+
+<script>
+    //0 = work, 1 = rest;
+    var mode = 0;
+    var restTime = 5;
+    var runningTime = 25;
+    var minutes = 25;
+    var seconds = 0;
+
+
+    document.getElementById("pomodoro").innerHTML = document.getElementById("workTime").innerHTML;
+    document.getElementById("currentMode").innerHTML = "Work, you busy little bee!";
+
+    function tickIncrement(e) {
+
+        switch (e) {
+            case "rest":
+                document.getElementById(e).innerHTML++;
+                restTime++;
+                break;
+
+            case "workTime":
+                document.getElementById(e).innerHTML++;
+                document.getElementById("pomodoro").innerHTML = document.getElementById(e).innerHTML;
+                runningTime++;
+                minutes = runningTime.valueOf();
+                break;
+        }
+    }
+
+    function tickDecrement(e) {
+        //can only go down to 1 minute
+
+
+        switch (e) {
+            case "rest":
+                if (restTime >= 2) {
+                    restTime--;
+                    document.getElementById(e).innerHTML = restTime;
+                }
+                break;
+            case "workTime":
+                if (runningTime >= 2) {
+                    runningTime--;
+                    minutes = runningTime;
+                    document.getElementById(e).innerHTML = runningTime;
+                    document.getElementById("pomodoro").innerHTML = document.getElementById(e).innerHTML;
+
+
+                }
+                break;
+
+        }
+
+    }
+
+    function resetTimer() {
+        stopTimer();
+        document.getElementById("rest").innerHTML = restTime;
+        document.getElementById("workTime").innerHTML = runningTime;
+        document.getElementById("pomodoro").innerHTML = runningTime;
+        minutes = runningTime;
+        seconds = 0;
+        mode = 0;
+        document.body.style.backgroundColor = "#81c784";
+        document.getElementById("currentMode").innerHTML = "Work, you busy little bee!";
+
+    }
+
+    var timer = null;
+
+    function stopTimer() {
+        clearTimeout(timer);
+    }
+
+
+    function startTimer() {
+        document.getElementById("pomodoro").innerHTML = checkNumber(minutes) + ":" + checkNumber(seconds);
+        tick();
+        timer = setTimeout(startTimer, 1000);
+    }
+
+    //perform second tick
+    function tick() {
+        if (seconds > 0) {
+            seconds--;
+        }
+        else if (seconds == 0) {
+            seconds = 59;
+            if (minutes > 0) {
+                minutes--;
+            }
+            else {
+                changeMode();
+            }
+        }
+
+    }
+    //work 0, rest 1
+    function changeMode() {
+        seconds = 0;
+        switch (mode) {
+            case 0:
+                mode = 1;
+                minutes = restTime;
+                document.getElementById("currentMode").innerHTML = "Rest, you've earned it!";
+                document.body.style.backgroundColor = "#e57373";
+                break;
+            case 1:
+                mode = 0;
+                minutes = runningTime;
+                document.body.style.backgroundColor = "#81c784";
+                document.getElementById("currentMode").innerHTML = "Work, you busy little bee!";
+                break;
+        }
+    }
+
+    //place a starting '0' if less than 10
+    function checkNumber(i) {
+        if (i < 10) {
+            i = "0" + i;
+        }
+        return i;
+    }
+
+
+</script>
+</body>
+</html>

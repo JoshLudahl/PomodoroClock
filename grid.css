@@ -1,0 +1,100 @@
+
+
+/*
+
+The Simple Grid
+
+Created by Josh Ludahl
+
+
+
+*/
+
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+ 
+.grid {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+}
+
+.grid:before, 
+.grid:after {
+    margin: 0 auto;
+    content:"";
+    display: table ;
+    clear:both;
+}
+
+[class*='col-'] {
+    float: left;
+    padding: .25em;
+}
+
+/* Percentage Grid Area */
+.col-25 { width: 25%; }     /* Changes to 50% on tablets, 100% on phones  */
+.col-30 { width: 30%; }     /* Changes to 50% on tablets, 100% on phones  */
+.col-40 { width: 40%; }     /* 100% on phones */
+.col-50 {width: 50%; }      /* Stays 50% on all devices   */
+.col-60 {width: 60%; }      /* 100% on phones  */
+.col-70 {width: 70%; }      /* Changes to 50% on tablets, 100% on phones  */
+.col-75 {width: 75%; }      /* Changes to 50% on tablets, 100% on phones  */
+.col-100 {width: 100%; }    /* Stays 100%  */
+
+/* based on number of col */
+.col-1 {width:  100%; }             /* Stays 100%   */
+.col-2 {width:  50%; }              /* Changes to 50% on tablets, 100% on phones */
+.col-3 {width:  33.333333333%; }    /* Changes to 100% on phones  */
+.col-4 {width:  25%; }              /* Changes to 50% on tablets and phones  */
+.col-5 {width:  20%; }              /* Changes to 100% on phones  */
+.col-6 {width:  16.666666667%; }    /* Changes to 50% on phones  */
+.col-7 {width:  14.285714286%; }    /* Changes to 100% on phones and tablets  */
+.col-8 {width:  12.5%;}             /* Changes to 50% on tablets and phones  */
+.col-9 {width:  11.111111111%; }    /* Changes to 100% on phones  */    
+.col-10 {width:  10%; }             /* Changes to 50% on tablets and phones  */
+.col-11 {width:  9.0909090909%; }   /* Changes to 100% on phones   */
+.col-12 {width:  8.3333333333%; }   /* Changes to 50% on tablets  */
+.col-13 {width:  7.6923076923%; }   /* Changes to 100% on phones  */
+.col-14 {width:  7.1428571429%; }   /* Changes to 50% on phones  */
+.col-15 {width:  6.6666666667%; }   /* Changes to 100% on phones  */
+
+
+/* made responsive */
+    /* roughly phone screen */
+@media only screen and (max-width: 35em), only screen and (max-device-width: 35em) {
+    *[class^="col-"] {
+        width: 100%;
+    }
+}
+
+    /* roughly large phones, phablets, and small tablet screens */
+@media (min-width: 35em) and (max-width: 50em) {
+    .col-4, .col-6, .col-8, .col-10, .col-12, .col-14 {
+        width: 50%;
+    } 
+    .col-1, .col-2, .col-3, .col-5, .col-7, .col-9, .col-11, .col-13, .col-15, .col-60, .col-25, .col-30, .col-40, .col-70, .col-75 {
+        width: 100%;
+    }
+}
+
+    /* roughly tablet / ereader screen */
+@media (min-width:50em) and (max-width: 68em) {
+    .col-2, .col-7, .col-9, .col-11, .col-13, .col-15 {
+        width: 100%;
+    }
+    .col-4, .col-8, .col-10, .col-12, .col-14, .col-25, .col-30, .col-70, .col-75 {
+        width: 50%;
+    }
+
+}
