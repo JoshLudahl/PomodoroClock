@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Pomodoro Clock</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://use.fontawesome.com/888f010f52.js"></script>
     <link rel="stylesheet" href="grid.css" type="text/css"/>
     <link rel="stylesheet" href="main.css" type="text/css"/>
@@ -180,6 +180,9 @@
                 minutes--;
             }
             else {
+			//audio clip from http://soundbible.com/1542-Air-Horn.html
+			var audio = new Audio('horn.wav');
+			audio.play();
                 changeMode();
             }
         }
